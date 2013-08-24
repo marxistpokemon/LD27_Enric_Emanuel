@@ -214,6 +214,13 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-#Coisas da Unity
-/Ludum Dare/Library/*
-/Ludum Dare/Temp/*
+# Unity .gitignore file.
+.DS_Store
+Ludum Dare/Library
+Ludum Dare/Library/*
+*.csproj
+*.sln
+*.userprefs
+Ludum Dare/Temp
+*.pidb
+Ludum Dare/Build
