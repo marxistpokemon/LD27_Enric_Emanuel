@@ -8,7 +8,27 @@ public enum PlayerChar {
 	ARCHER
 }
 
+[System.Serializable]
+public class Coord {
+	
+	public int r;
+	public int c;
+	
+	public Coord (int pR, int pC){
+		r = pR;
+		c = pC;
+	}
+	
+	public override bool Equals (object obj)
+	{
+		Coord queryCoord = obj as Coord;
+		return (r == queryCoord.r && c == queryCoord.c);
+	}
+}
+
 public class Player : MonoBehaviour {
+	
+	public Coord gridPos;
 	
 	public GameObject characterPrefab;
 	public GameObject[] characters;
@@ -22,9 +42,11 @@ public class Player : MonoBehaviour {
 	public GoTweenConfig goConfig;
 	
 	public float rotationTime = 0.5f;
+	public float moveDuration = 0.5f;
 	public float speed;
 	
-	public Vector3 playerInput;
+	public Vector3 input;
+	public bool isMoving = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -80,11 +102,11 @@ public class Player : MonoBehaviour {
 				.setEaseType(GoEaseType.QuadInOut));
 		}
 		
-		playerInput = new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal"));
-		playerInput.Normalize();
 	}
 	
+	
+	
 	void FixedUpdate(){
-		rigidbody.MovePosition(playerInput*Time.fixedDeltaTime*speed+transform.position);
+		//rigidbody.MovePosition(input*Time.fixedDeltaTime*speed+transform.position);
 	}
 }
