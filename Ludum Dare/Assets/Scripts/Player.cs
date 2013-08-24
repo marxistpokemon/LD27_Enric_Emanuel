@@ -22,6 +22,9 @@ public class Player : MonoBehaviour {
 	public GoTweenConfig goConfig;
 	
 	public float rotationTime = 0.5f;
+	public float speed;
+	
+	public Vector3 playerInput;
 	
 	// Use this for initialization
 	void Start () {
@@ -30,35 +33,23 @@ public class Player : MonoBehaviour {
 		
 		for (int i = 0; i < 4; i++) {
 			characters[i] = Instantiate (characterPrefab) as GameObject;
+			characters[i].transform.parent = this.transform;
 			Vector3 pos = new Vector3();
 			switch(i){
-			case 0 :
-				pos = new Vector3(
-					transform.position.x - distanceFromCenter,
-					transform.position.y,
-					transform.position.z);
+			case (int)PlayerChar.ARCHER :
+				pos = new Vector3(0, 0, -distanceFromCenter);
 				break;
-			case 1 :
-				pos = new Vector3(
-					transform.position.x,
-					transform.position.y,
-					transform.position.z + distanceFromCenter);
+			case (int)PlayerChar.WIZARD :
+				pos = new Vector3(0, 0, distanceFromCenter);
 				break;
-			case 2 :
-				pos = new Vector3(
-					transform.position.x + distanceFromCenter,
-					transform.position.y,
-					transform.position.z);
+			case (int)PlayerChar.HEALER :
+				pos = new Vector3(-distanceFromCenter, 0, 0);
 				break;
-			case 3 :
-				pos = new Vector3(
-					transform.position.x,
-					transform.position.y,
-					transform.position.z - distanceFromCenter);
+			case (int)PlayerChar.WARRIOR :
+				pos = new Vector3(distanceFromCenter, 0, 0);
 				break;
 			}
-			characters[i].transform.position = pos;
-			characters[i].transform.parent = this.transform;
+			characters[i].transform.localPosition = pos;
 		}
 		
 		characters[(int)PlayerChar.ARCHER].renderer.material.color = archerColor;
@@ -88,5 +79,12 @@ public class Player : MonoBehaviour {
 			Go.to(this.transform, rotationTime, new GoTweenConfig().rotation(Quaternion.Euler(0,180,0))
 				.setEaseType(GoEaseType.QuadInOut));
 		}
+		
+		playerInput = new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal"));
+		playerInput.Normalize();
+	}
+	
+	void FixedUpdate(){
+		rigidbody.MovePosition(playerInput*Time.fixedDeltaTime*speed+transform.position);
 	}
 }
