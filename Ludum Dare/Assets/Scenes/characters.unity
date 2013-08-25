@@ -389,7 +389,7 @@ MonoBehaviour:
     c: 0
   input: {x: 0, y: 0, z: 0}
   isMoving: 0
-  moveDuration: .5
+  moveDuration: .300000012
 --- !u!135 &1165792679
 SphereCollider:
   m_ObjectHideFlags: 0

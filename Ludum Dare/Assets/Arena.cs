@@ -126,7 +126,7 @@ public class Arena : MonoBehaviour {
 			
 			Go.to (player.transform, player.moveDuration, new GoTweenConfig()
 				.position(tweenEnd)
-				.setEaseType(GoEaseType.QuadInOut))
+				.setEaseType(GoEaseType.BackInOut))
 				.setOnCompleteHandler(move => {
 					player.isMoving = false;
 					player.gridPos = newPos;

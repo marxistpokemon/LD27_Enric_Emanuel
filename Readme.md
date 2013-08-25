@@ -1,3 +1,8 @@
 # Projeto da LD 27
 
-É nóis.
+O jogador tem que destruir inimigos coloridos que vêm em sua direção usando balas da mesma cor.
+
+**Equipe**
+
+- Emanuel Masamune Tavares
+- Enric Llagostera
