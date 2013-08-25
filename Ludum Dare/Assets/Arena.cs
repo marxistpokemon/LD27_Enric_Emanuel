@@ -17,7 +17,7 @@ public class Arena : MonoBehaviour {
 	public Material grid1;
 	public Material grid2;
 	
-	public Player player;
+	public PlayerRoot player;
 	
 	// Use this for initialization
 	void Start () {
@@ -80,7 +80,7 @@ public class Arena : MonoBehaviour {
 
 		if(!player.isMoving){
 			
-			player.input = new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal"));
+			player.input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 			player.input.Normalize();
 			
 			// se nao tem input do jogador
@@ -94,20 +94,20 @@ public class Arena : MonoBehaviour {
 				// anda nas linhas
 				
 				if(player.input.x > 0){ // ir para baixo
-					newPos.r = Mathf.Clamp(player.gridPos.r+1, 0, numRows);
+					newPos.r = Mathf.Clamp(player.gridPos.r+1, 0, numRows-1);
 					
 				}
 				else { // ir para cima
-					newPos.r = Mathf.Clamp(player.gridPos.r-1, 0, numRows);
+					newPos.r = Mathf.Clamp(player.gridPos.r-1, 0, numRows-1);
 				}
 			}
 			else {
 				// anda nas colunas
 				if(player.input.z > 0){ // ir para direita
-					newPos.c = Mathf.Clamp(player.gridPos.c+1, 0, numColumns);
+					newPos.c = Mathf.Clamp(player.gridPos.c+1, 0, numColumns-1);
 				}
 				else { // ir para esquerda
-					newPos.c = Mathf.Clamp(player.gridPos.c-1, 0, numColumns);
+					newPos.c = Mathf.Clamp(player.gridPos.c-1, 0, numColumns-1);
 				}
 			}
 			
